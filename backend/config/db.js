@@ -1,0 +1,10 @@
+import mongoose from "mongoose";
+import dns from "node:dns";
+
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
+
+export default async function connectDB() {
+  if (!process.env.MONGO_URI) throw new Error("MONGO_URI is missing. Create backend/.env.");
+  await mongoose.connect(process.env.MONGO_URI);
+  console.log("MongoDB connected successfully.");
+}
